@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Generated Questions</h2>
+    <ul>
+        {% for question in questions %}
+        <li>{{ question }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/">Back to Home</a>
+</div>
+{% endblock %}

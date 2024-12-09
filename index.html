@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Select Language</h2>
+    <form action="/upload" method="POST">
+        <select name="language" required>
+            <option value="english">English</option>
+            <option value="hindi">Hindi</option>
+            <option value="sanskrit">Sanskrit</option>
+        </select>
+        <button type="submit">Next</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Upload PDF and Enter Prompt</h2>
+    <form action="/process" method="POST" enctype="multipart/form-data">
+        <label for="file">Upload PDF:</label>
+        <input type="file" name="file" id="file" required>
+        <label for="prompt">Enter Prompt:</label>
+        <textarea name="prompt" id="prompt" placeholder="Enter your prompt here..." required></textarea>
+        <button type="submit">Generate Questions</button>
+    </form>
+</div>
+{% endblock %}
