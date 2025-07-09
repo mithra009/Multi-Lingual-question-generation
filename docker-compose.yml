@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  question-generator:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - DEBUG=False
+      - SECRET_KEY=${SECRET_KEY:-your-secret-key-change-in-production}
+      - UPLOAD_FOLDER=uploads
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./uploads:/app/uploads
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Development service
+  question-generator-dev:
+    build: .
+    ports:
+      - "5001:5000"
+    environment:
+      - FLASK_ENV=development
+      - DEBUG=True
+      - SECRET_KEY=dev-secret-key
+      - UPLOAD_FOLDER=uploads
+      - LOG_LEVEL=DEBUG
+    volumes:
+      - .:/app
+      - ./uploads:/app/uploads
+    command: python app.py
+    profiles:
+      - dev 

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated Questions - Multi-Lingual Question Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .question-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 1rem;
+        }
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #5a6fd8, #6a4190);
+            transform: translateY(-2px);
+        }
+        .btn-success {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+        }
+        .btn-success:hover {
+            background: linear-gradient(45deg, #218838, #1ea085);
+            transform: translateY(-2px);
+        }
+        .question-number {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        .stats-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid min-vh-100 py-5">
+        <div class="main-container p-5">
+            <div class="text-center mb-4">
+                <a href="/" class="btn btn-outline-primary mb-3">
+                    <i class="fas fa-home me-2"></i>
+                    Generate New Questions
+                </a>
+                <h2 class="fw-bold text-primary mb-2">
+                    <i class="fas fa-check-circle me-3 text-success"></i>
+                    Questions Generated Successfully!
+                </h2>
+                <p class="text-muted">
+                    Your questions are ready. You can view, copy, or download them below.
+                </p>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="stats-card text-center">
+                        <i class="fas fa-list-ol fa-2x mb-2"></i>
+                        <h4 class="mb-1">{{ questions|length }}</h4>
+                        <p class="mb-0">Total Questions</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stats-card text-center">
+                        <i class="fas fa-clock fa-2x mb-2"></i>
+                        <p class="mb-0">Generated At</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stats-card text-center">
+                        <i class="fas fa-language fa-2x mb-2"></i>
+                        <h4 class="mb-1">{{ language.title() }}</h4>
+                        <p class="mb-0">Language</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-question-circle me-2"></i>
+                                Generated Questions
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            {% if questions %}
+                                <div id="questionsList">
+                                    {% for question in questions %}
+                                    <div class="question-card card">
+                                        <div class="card-body d-flex align-items-start">
+                                            <div class="question-number">{{ loop.index }}</div>
+                                            <div class="flex-grow-1">
+                                                <p class="card-text mb-0">{{ question }}</p>
+                                            </div>
+                                            <div class="ms-2">
+                                                <button class="btn btn-sm btn-outline-primary" onclick="copyQuestion({{ loop.index0 }})">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <div class="text-center py-5">
+                                    <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+                                    <h5>No questions generated</h5>
+                                    <p class="text-muted">Please try again with different settings or content.</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-download me-2"></i>
+                                Export Options
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-3">
+                                <button class="btn btn-success" onclick="exportToText()">
+                                    <i class="fas fa-file-text me-2"></i>
+                                    Export as Text
+                                </button>
+                                <button class="btn btn-outline-primary" onclick="copyAllQuestions()">
+                                    <i class="fas fa-copy me-2"></i>
+                                    Copy All Questions
+                                </button>
+                                <button class="btn btn-outline-secondary" onclick="printQuestions()">
+                                    <i class="fas fa-print me-2"></i>
+                                    Print Questions
+                                </button>
+                            </div>
+                            
+                            <hr>
+                            
+                            <h6 class="fw-bold mb-3">
+                                <i class="fas fa-cog me-2"></i>
+                                Additional Options
+                            </h6>
+                            
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="includeNumbers" checked>
+                                <label class="form-check-label" for="includeNumbers">
+                                    Include question numbers
+                                </label>
+                            </div>
+                            
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="includeTimestamp" checked>
+                                <label class="form-check-label" for="includeTimestamp">
+                                    Include timestamp
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const questions = {{ questions|tojson }};
+        
+        function copyQuestion(index) {
+            const question = questions[index];
+            navigator.clipboard.writeText(question).then(() => {
+                showToast('Question copied to clipboard!', 'success');
+            }).catch(() => {
+                showToast('Failed to copy question', 'error');
+            });
+        }
+        
+        function copyAllQuestions() {
+            const includeNumbers = document.getElementById('includeNumbers').checked;
+            const includeTimestamp = document.getElementById('includeTimestamp').checked;
+            
+            let text = '';
+            
+            if (includeTimestamp) {
+                text += `Generated on: ${new Date().toLocaleString()}\n\n`;
+            }
+            
+            questions.forEach((question, index) => {
+                if (includeNumbers) {
+                    text += `${index + 1}. `;
+                }
+                text += `${question}\n`;
+            });
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('All questions copied to clipboard!', 'success');
+            }).catch(() => {
+                showToast('Failed to copy questions', 'error');
+            });
+        }
+        
+        function exportToText() {
+            const includeNumbers = document.getElementById('includeNumbers').checked;
+            const includeTimestamp = document.getElementById('includeTimestamp').checked;
+            
+            let text = '';
+            
+            if (includeTimestamp) {
+                text += `Generated on: ${new Date().toLocaleString()}\n\n`;
+            }
+            
+            questions.forEach((question, index) => {
+                if (includeNumbers) {
+                    text += `${index + 1}. `;
+                }
+                text += `${question}\n`;
+            });
+            
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `questions_${new Date().toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showToast('Questions exported successfully!', 'success');
+        }
+        
+        function printQuestions() {
+            const printWindow = window.open('', '_blank');
+            const includeNumbers = document.getElementById('includeNumbers').checked;
+            const includeTimestamp = document.getElementById('includeTimestamp').checked;
+            
+            let html = `
+                <html>
+                <head>
+                    <title>Generated Questions</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        .question { margin-bottom: 15px; }
+                        .timestamp { color: #666; margin-bottom: 20px; }
+                    </style>
+                </head>
+                <body>
+                    <h1>Generated Questions</h1>
+            `;
+            
+            if (includeTimestamp) {
+                html += `<div class="timestamp">Generated on: ${new Date().toLocaleString()}</div>`;
+            }
+            
+            questions.forEach((question, index) => {
+                html += '<div class="question">';
+                if (includeNumbers) {
+                    html += `<strong>${index + 1}.</strong> `;
+                }
+                html += `${question}</div>`;
+            });
+            
+            html += '</body></html>';
+            
+            printWindow.document.write(html);
+            printWindow.document.close();
+            printWindow.print();
+        }
+        
+        function showToast(message, type) {
+            // Simple toast notification
+            const toast = document.createElement('div');
+            toast.className = `alert alert-${type === 'success' ? 'success' : 'danger'} position-fixed`;
+            toast.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            toast.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'} me-2"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html> 
