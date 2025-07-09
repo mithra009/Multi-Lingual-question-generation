@@ -50,7 +50,7 @@ Multi-Lingual-question-generation/
 - `pip` package manager
 - (Recommended) Virtual environment tool like `venv`
 
-### 🔧 Installation
+###  Installation
 
 1. **Clone the repository**:
    ```bash
@@ -91,7 +91,7 @@ Multi-Lingual-question-generation/
 
 ---
 
-## 📖 Usage
+##  Usage
 
 ### Step-by-Step Workflow
 
@@ -112,7 +112,7 @@ Multi-Lingual-question-generation/
 
 ---
 
-## ⚙️ Configuration (`config.py`)
+##  Configuration (`config.py`)
 
 ```python
 class Config:
@@ -148,7 +148,7 @@ class Config:
 
 ---
 
-## 🛠 Dependencies
+##  Dependencies
 
 ### Core
 
