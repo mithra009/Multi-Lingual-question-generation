@@ -1,10 +1,10 @@
-# 🌐 Multi-Lingual Question Generator
+#  Multi-Lingual Question Generator
 
 A modern, AI-powered web application that generates insightful and relevant questions from textual content in various languages, including **Sanskrit, Hindi, and English**. This tool processes user-uploaded PDF files and creates personalized quizzes based on user prompts using advanced NLP techniques and transformer models.
 
 ---
 
-## 🌟 Features
+##  Features
 
 - **Multi-Language Support**: Generate questions from English, Hindi, and Sanskrit text
 - **PDF Processing**: Upload and extract content from PDF files with high accuracy
@@ -17,7 +17,7 @@ A modern, AI-powered web application that generates insightful and relevant ques
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 Multi-Lingual-question-generation/
@@ -42,9 +42,9 @@ Multi-Lingual-question-generation/
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
-### ✅ Prerequisites
+###  Prerequisites
 
 - Python 3.8 or higher
 - `pip` package manager
@@ -104,7 +104,7 @@ Multi-Lingual-question-generation/
 
 ---
 
-### 🌍 Supported Languages
+###  Supported Languages
 
 - **English**: Uses transformer models with Retrieval-Augmented Generation (RAG)
 - **Hindi**: Uses rule-based logic and pattern matching
@@ -130,16 +130,16 @@ class Config:
 
 ---
 
-## 🔧 Development Notes
+##  Development Notes
 
-### 🧱 Project Structure
+###  Project Structure
 
 - Modular and extensible for new languages
 - Type annotations throughout
 - Logging and exception management
 - Test-ready structure
 
-### ➕ Adding New Languages
+###  Adding New Languages
 
 1. Create a file in the `languages/` directory.
 2. Implement logic for that language.
@@ -148,7 +148,7 @@ class Config:
 
 ---
 
-## 🛠️ Dependencies
+## 🛠 Dependencies
 
 ### Core
 
@@ -167,7 +167,7 @@ class Config:
 
 ---
 
-## 🔒 Security Features
+##  Security Features
 
 - Strict file type validation
 - Sanitized file uploads
@@ -177,9 +177,9 @@ class Config:
 
 ---
 
-## 🚀 Deployment
+##  Deployment
 
-### ✅ Production Deployment
+###  Production Deployment
 
 ```bash
 export FLASK_ENV=production
@@ -210,7 +210,7 @@ server {
 
 ---
 
-### 🐳 Docker Deployment
+###  Docker Deployment
 
 ```dockerfile
 FROM python:3.9-slim
@@ -227,7 +227,7 @@ CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
 1. Fork the repo  
 2. Create a new branch:  
@@ -235,9 +235,9 @@ CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
 3. Commit and push:  
    `git commit -m "Add my feature"`  
    `git push origin feature/my-feature`
-4. Open a pull request 🎉
+4. Open a pull request 
 
-### 🧑‍💻 Guidelines
+###  Guidelines
 
 - Follow PEP 8
 - Use type hints
@@ -247,18 +247,18 @@ CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
 
 ---
 
-## 📝 License
+##  License
 
 Licensed under the [MIT License](LICENSE).
 
 ---
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - [Hugging Face](https://huggingface.co/) for transformer models  
 - [Google Translate API](https://cloud.google.com/translate) for Sanskrit support  
 - [Bootstrap](https://getbootstrap.com/) for UI  
-- The open-source Python community 🚀
+- The open-source Python community 
 
 ---
 
